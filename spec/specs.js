@@ -20,5 +20,12 @@ describe('pigLatin', function() {
     expect(pigLatin("chair")).to.equal("airchay");
   });
 
+  it("returns word that begins with qu with qu at then end and ay", function() {
+    expect(pigLatin("quest")).to.equal("estquay");
+  });
 
+  it("returns sentence containing all of these rulse", function() {
+    expect(pigLatin("he went on a chair quest")).to.equal("ehay entway onay a airchay estquay");
+  });
+  
 });

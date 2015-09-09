@@ -1,6 +1,7 @@
 var pigLatin = function(string) {
 
-  var wordArray = string.split(" ");
+  var lowerString = string.toLowerCase();
+  var wordArray = lowerString.split(" ");
 
   var pigLatinString = "";
   var vowelArray = ["a", "e", "i", "o", "u"];
@@ -12,10 +13,21 @@ var pigLatin = function(string) {
 
     var letterArray = word.split("");
 
-    if (vowelArray.indexOf(word.charAt(0)) != -1)
+    if (consonantArray.indexOf(word) !== -1 || vowelArray.indexOf(word) !== -1)
+    {
+      var newWord = word;
+    }
+
+    else if (vowelArray.indexOf(word.charAt(0)) != -1)
     {
       // console.log(word.charAt(0));
       var newWord = (word.concat("ay"));
+    }
+
+    else if (word.substr(0, 2) === "qu")
+    {
+      word += word.charAt(0) + word.charAt(1) + "ay";
+      var newWord = word.replace((word.substr(0,2)), "");
     }
 
     else if (consonantArray.indexOf(letterArray[0]) != -1 && consonantArray.indexOf(letterArray[1]) != -1)
@@ -40,3 +52,15 @@ var pigLatin = function(string) {
   return finalString;
 
 };
+
+$(document).ready(function() {
+    $("form#translator").submit(function(event) {
+        var string = $("input#string").val();
+        var result = pigLatin(string);
+
+        $(".result").text(result);
+
+        $("#result").show();
+        event.preventDefault();
+    });
+});
